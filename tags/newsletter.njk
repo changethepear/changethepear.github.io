@@ -1,0 +1,25 @@
+---
+layout: layout
+title: newsletter
+permalink: /tags/newsletter/
+date: ""
+eleventyExcludeFromCollections: true
+---
+
+<div class="post-list">
+  {% for post in collections.posts | reverse %}
+    {% if "newsletter" in post.data.tags %}
+      <article class="post-card">
+        <h3 class="post-title">
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h3>
+        <p class="post-date">
+          {{ post.date.toLocaleDateString("en-GB", { day: 'numeric', month: 'short', year: 'numeric' }) }}
+        </p>
+        {% if post.data.description %}
+          <p class="post-excerpt">{{ post.data.description }}</p>
+        {% endif %}
+      </article>
+    {% endif %}
+  {% endfor %}
+</div>

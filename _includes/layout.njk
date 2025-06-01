@@ -1,0 +1,23 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  {% if title %}
+    <h1 class="post-title-with-date">
+      {{ title }}
+      {% if page.date and "/posts/" in page.filePathStem %}
+        <span class="post-date-inline">{{ page.date | date("d LLL yyyy") }}</span>
+      {% endif %}
+    </h1>
+  {% endif %}
+  {{ content | safe }}
+  {% if "/posts/" in page.filePathStem %}
+  <hr>
+  <div class="subscribe-form">
+    <form action="https://your-mail-service-url" method="POST">
+      <label for="email">subscribe for more!</label>
+      <input type="email" id="email" name="email" required>
+      <button class="subscribe-button" type="submit">submit</button>
+    </form>
+  </div>
+{% endif %}
+{% endblock %}
