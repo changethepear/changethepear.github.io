@@ -1,28 +1,27 @@
 ---
-permalink: /feed.xml
+permalink: feed.xml
 eleventyExcludeFromCollections: true
 ---
 
-{% set posts = collections.post | reverse %}
-<?xml version="1.0" encoding="UTF-8"?>
+{% set posts = collections.posts | reverse | slice(0, 10) %}
+
+<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
   <channel>
     <title>change the pear</title>
     <link>https://changethepear.com</link>
-    <description>the newsletter of change the pear</description>
+    <description>A newsletter about change, thinking, and weird fruit</description>
     <language>en-us</language>
-    <lastBuildDate>{{ posts[0].date | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
+    <lastBuildDate>{{ posts[0].date | rssDate }}</lastBuildDate>
 
     {% for post in posts %}
-    <item>
-      <title>{{ post.data.title }}</title>
-      <link>https://changethepear.com{{ post.url }}</link>
-      <guid isPermaLink="true">https://changethepear.com{{ post.url }}</guid>
-      <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-      <description><![CDATA[
-        {{ post.templateContent | safe }}
-      ]]></description>
-    </item>
+      <item>
+        <title>{{ post.data.title }}</title>
+        <link>https://changethepear.com{{ post.url }}</link>
+        <description>{{ post.templateContent | escape }}</description>
+        <pubDate>{{ post.date | rssDate }}</pubDate>
+        <guid>https://changethepear.com{{ post.url }}</guid>
+      </item>
     {% endfor %}
   </channel>
 </rss>
