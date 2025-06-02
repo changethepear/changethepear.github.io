@@ -1,27 +1,41 @@
+---json
+{
+  "permalink": "feed.json",
+  "eleventyExcludeFromCollections": true,
+  "metadata": {
+    "title": "change the pear",
+    "description": "mildly chaotic updates on what i'm interested in",
+    "language": "en",
+    "base": "https://changethepear.com/",
+    "author": {
+      "name": "miriam"
+    }
+  }
+}
 ---
-permalink: feed.xml
-eleventyExcludeFromCollections: true
----
-
-{% set posts = collections.posts | reverse | slice(0, 10) %}
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
-  <channel>
-    <title>change the pear</title>
-    <link>https://changethepear.com</link>
-    <description>A newsletter about change, thinking, and weird fruit</description>
-    <language>en-us</language>
-    <lastBuildDate>{{ posts[0].date | rssDate }}</lastBuildDate>
-
-    {% for post in posts %}
-      <item>
-        <title>{{ post.data.title }}</title>
-        <link>https://changethepear.com{{ post.url }}</link>
-        <description>{{ post.templateContent | escape }}</description>
-        <pubDate>{{ post.date | rssDate }}</pubDate>
-        <guid>https://changethepear.com{{ post.url }}</guid>
-      </item>
-    {% endfor %}
-  </channel>
-</rss>
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "{{ metadata.title }}",
+  "language": "{{ metadata.language or page.lang }}",
+  "home_page_url": "{{ metadata.base | addPathPrefixToFullUrl }}",
+  "feed_url": "{{ permalink | htmlBaseUrl(metadata.base) }}",
+  "description": "{{ metadata.description }}",
+  "authors": [
+    {
+      "name": "{{ metadata.author.name }}"
+    }
+  ],
+  "items": [
+    {%- for post in collections.posts | reverse %}
+    {%- set absolutePostUrl %}{{ post.url | htmlBaseUrl(metadata.base) }}{% endset %}
+    {
+      "id": "{{ absolutePostUrl }}",
+      "url": "{{ absolutePostUrl }}",
+      "title": "{{ post.data.title }}",
+      "content_html": {% if post.content %}{{ post.content | renderTransforms(post.data.page, metadata.base) | dump | safe }}{% else %}""{% endif %},
+      "date_published": "{{ post.date | dateToRfc3339 }}"
+    }
+    {% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}
