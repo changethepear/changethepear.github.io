@@ -1,9 +1,12 @@
 
 const { DateTime } = require("luxon");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+
 
 module.exports = function(eleventyConfig) {
   // Copy CSS folder to _site
   eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addFilter("date", (dateObj, format = "dd LLL yyyy") => {
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat(format);
