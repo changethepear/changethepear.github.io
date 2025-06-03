@@ -6,25 +6,34 @@ layout: layout
   <h2>it‘s miriam!</h2>
   <p>welcome to change the pear. i publish <a href="/tags/newsletter/">a newsletter</a> every couple of months and other writing even more sporadically than that. subscribe below if you’d like to get them in your inbox.</p>
 <div class="subscribe-form">
-  <form id="subscribe-form">
+<form id="subscribe-form">
   <label for="email">subscribe:</label>
   <input type="email" id="email" name="email" required>
-  <button class="subscribe-button" type="submit">submit</button>
-  <p id="response-msg"></p>
+  <button type="submit">submit</button>
+  <p id="response-msg" style="margin-top: 0.5rem;"></p>
 </form>
+
 <script>
   document.getElementById("subscribe-form").addEventListener("submit", async function(e) {
     e.preventDefault();
+
     const email = document.getElementById("email").value;
     const responseMsg = document.getElementById("response-msg");
 
-    const response = await fetch("/.netlify/functions/subscribe", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-    });
+    try {
+      const response = await fetch("/.netlify/functions/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
 
-    const result = await response.json();
-    responseMsg.textContent = result.message || "Something went wrong.";
+      const result = await response.json();
+      responseMsg.textContent = result.message || "Something went wrong.";
+    } catch (error) {
+      responseMsg.textContent = "Failed to connect to server.";
+    }
   });
 </script>
 </div>
