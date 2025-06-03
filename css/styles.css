@@ -110,6 +110,25 @@ a:hover {
   width: 100%;
 }
 
+@media (max-width: 640px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .site-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .site-nav {
+    margin-top: 0.5rem;
+  }
+
+  .site-nav a {
+    margin: 0 0.75rem;
+  }
+}
+
 /* Tag Nav */
 .tag-nav {
   margin: 2rem 0;
