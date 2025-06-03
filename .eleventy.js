@@ -1,6 +1,11 @@
 
 const { DateTime } = require("luxon");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const markdownIt = require("markdown-it");
+const markdownLib = markdownIt({
+    html: true,
+    typographer: true
+  });
 
 
 module.exports = function(eleventyConfig) {
@@ -13,6 +18,8 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addPassthroughCopy("images");
+
+  eleventyConfig.setLibrary("md", markdownLib);
 
   // Create a 'posts' collection
   eleventyConfig.addCollection("posts", function(collectionApi) {
