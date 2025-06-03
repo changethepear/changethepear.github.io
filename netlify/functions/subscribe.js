@@ -1,21 +1,29 @@
-const fetch = require("undici");
+const { fetch } = require("undici");
+const querystring = require("querystring");
 
-exports.handler = async function (event, context) {
+exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
-      body: JSON.stringify({ message: "Method Not Allowed" }),
+      body: "Method Not Allowed",
     };
   }
 
-  try {
-    const { email } = JSON.parse(event.body);
-    const apiKey = process.env.EMAILOCTOPUS_API_KEY;
-    const listId = process.env.EMAILOCTOPUS_LIST_ID;
+  const apiKey = process.env.EMAILOCTOPUS_API_KEY;
+  const listId = process.env.EMAILOCTOPUS_LIST_ID;
 
+  // Parse form-encoded body (from HTML form)
+  const parsedBody = querystring.parse(event.body);
+  const email = parsedBody.email;
+
+  console.log(`Received a submission: ${email}`);
+
+  try {
     const response = await fetch(`https://emailoctopus.com/api/1.6/lists/${listId}/contacts`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         api_key: apiKey,
         email_address: email,
@@ -23,7 +31,8 @@ exports.handler = async function (event, context) {
       }),
     });
 
-    const result = await response.json();
+    const responseText = await response.text();
+    console.log("response:", responseText);
 
     if (!response.ok) {
       return {
@@ -37,7 +46,7 @@ exports.handler = async function (event, context) {
     return {
       statusCode: 302,
       headers: {
-        location: "/thanks.html"
+        Location: "/thanks.html"
       },
     };
 

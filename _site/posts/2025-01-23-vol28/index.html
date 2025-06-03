@@ -86,11 +86,10 @@
   
   <hr>
   <div class="subscribe-form">
-  <form id="subscribe-form">
+  <form name="subscribe" method="POST" action="/.netlify/functions/subscribe">
   <label for="email">subscribe:</label>
-  <input type="email" id="email" name="email" placeholder="email address" required>
-  <button type="submit">submit</button>
-  <p id="response-msg" style="margin-top: 0.5rem;"></p>
+  <input type="email" name="email" placeholder="email adress" required >
+  <button class="subscribe-button" type="submit">submit</button>
   </form>
   </div>
 
