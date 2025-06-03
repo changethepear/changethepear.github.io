@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require("undici");
 
 exports.handler = async function (event, context) {
   if (event.httpMethod !== "POST") {
@@ -27,23 +27,26 @@ exports.handler = async function (event, context) {
 
     if (!response.ok) {
       return {
-        statusCode: response.status,
-        body: JSON.stringify({ message: result.error || "Subscription failed." }),
+        statusCode: 302,
+        headers: {
+        Location: "/error.html"
+        }
       };
     }
 
     return {
-      statusCode: 200,
+      statusCode: 302,
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        location: "/thanks.html"
       },
-      body: JSON.stringify({ message: "Subscription successful!" }),
     };
+
   } catch (err) {
     return {
-      statusCode: 500,
-      body: JSON.stringify({ message: "Internal Server Error" }),
+      statusCode: 302,
+      headers: {
+        Location: "/error.html"
+      }
     };
   }
 };

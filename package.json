@@ -10,6 +10,7 @@
   "dependencies": {
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "undici": "^7.10.0"
   }
 }
