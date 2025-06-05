@@ -7,7 +7,6 @@ const markdownLib = markdownIt({
   typographer: true
 });
 
-
 module.exports = function (eleventyConfig) {
   // Copy CSS folder to _site
   eleventyConfig.addPassthroughCopy("css");
