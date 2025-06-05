@@ -13,3 +13,7 @@ this used to be hosted on substack and <a href="/posts/2025-04-17-goodbye-substa
 
 if you subscribe, every so often you’ll get a deeply unserious yet also incredibly sincere update on my current interests—what i’m reading, listening to, eating, watching and thinking about. buckle up!
 
+<hr>
+
+this site was made using <a href="https://www.11ty.dev">eleventy</a>, is deployed by <a href="https://www.netlify.com/">netlify</a> and <a href="https://github.com">github pages</a>, and hosted on a custom domain from <a href="https://porkbun.com/">porkbun</a>. happy to answer any questions about it! 
+

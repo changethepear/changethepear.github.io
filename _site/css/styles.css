@@ -22,7 +22,12 @@ hr {
 }
 
 /* Typography */
-h1, h2, h3, h4, .post-title, .intro h2 {
+h1,
+h2,
+h3,
+h4,
+.post-title,
+.intro h2 {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   font-weight: 400;
 }
@@ -159,21 +164,26 @@ a:hover {
   font-size: 1.8rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   font-weight: 500;
-  margin-bottom: 0.2rem; /* tighter space after title */
-  margin-top: 0; /* no extra space above */
+  margin-bottom: 0.2rem;
+  /* tighter space after title */
+  margin-top: 0;
+  /* no extra space above */
 }
 
-.post-date-inline, .post-date {
+.post-date-inline,
+.post-date {
   display: block;
-  margin-top: 0; /* no space before */
-  margin-bottom: 0.5rem; /* just a bit of breathing room */
+  margin-top: 0;
+  /* no space before */
+  margin-bottom: 0.5rem;
+  /* just a bit of breathing room */
   color: #666;
   font-size: 0.95rem;
   font-family: sans-serif;
 }
 
 .post-title a {
-  color: inherit;
+  color: #8cbc59;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -194,7 +204,8 @@ a:hover {
 
 /* Reduce top margin only for the first post */
 .post-card:first-of-type {
-  margin-top: 1.5rem; /* or 1rem if you want it even closer */
+  margin-top: 1.5rem;
+  /* or 1rem if you want it even closer */
 }
 
 .post-excerpt {
@@ -252,4 +263,32 @@ a:hover {
 .subscribe-button:hover {
   background-color: #a9df6e;
   border-color: #a9df6e;
+}
+
+.read-more {
+  font-family: sans-serif;
+  font-size: 1rem;
+  color: #666;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+  color: #a9df6e;
+}
+
+blockquote {
+  color: #555;
+  border-left: 4px solid #a9df6e;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  background: #FFFDF8;
+}
+
+blockquote p {
+  margin: 0 0 1em 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
 }

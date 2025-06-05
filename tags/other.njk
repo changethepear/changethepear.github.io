@@ -15,7 +15,10 @@ permalink: /tags/other/
           {{ post.date.toLocaleDateString("en-GB", { day: 'numeric', month: 'short', year: 'numeric' }) }}
         </p>
         {% if post.data.description %}
-          <p class="post-excerpt">{{ post.data.description }}</p>
+          <p class="post-excerpt">
+          {{ post.templateContent | excerpt }}
+          <a href="{{ post.url }}" class="read-more"> [more]</a>
+          </p>
         {% endif %}
       </article>
     {% endif %}

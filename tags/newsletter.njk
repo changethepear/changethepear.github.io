@@ -17,7 +17,10 @@ eleventyExcludeFromCollections: true
           {{ post.date.toLocaleDateString("en-GB", { day: 'numeric', month: 'short', year: 'numeric' }) }}
         </p>
         {% if post.data.description %}
-          <p class="post-excerpt">{{ post.data.description }}</p>
+          <p class="post-excerpt">
+          {{ post.templateContent | newsletterExcerpt }}
+          <a href="{{ post.url }}" class="read-more"> [more]</a>
+          </p>
         {% endif %}
       </article>
     {% endif %}
