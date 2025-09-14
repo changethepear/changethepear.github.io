@@ -6,21 +6,16 @@ permalink: /tags/other/
 
 <div class="post-list">
   {% for post in collections.posts | reverse %}
-    {% if "other" in post.data.tags %}
-      <article class="post-card">
-        <h3 class="post-title">
-          <a href="{{ post.url }}">{{ post.data.title }}</a>
-        </h3>
-        <p class="post-date">
-          {{ post.date.toLocaleDateString("en-GB", { day: 'numeric', month: 'short', year: 'numeric' }) }}
-        </p>
-        {% if post.data.description %}
-          <p class="post-excerpt">
-          {{ post.templateContent | excerpt }}
-          <a href="{{ post.url }}" class="read-more"> [more]</a>
-          </p>
-        {% endif %}
-      </article>
+    {# DEBUG: print to terminal #}
+    {{ post.inputPath | log }}
+    {{ post.data.tags | log }}
+
+    {# keep the rest commented out for now #}
+    {# 
+    {% set tags = post.data.tags or [] %}
+    {% if "other" in tags %}
+      ... existing card markup ...
     {% endif %}
+    #}
   {% endfor %}
 </div>
