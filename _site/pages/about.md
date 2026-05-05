@@ -3,6 +3,7 @@ layout: layout
 title: about
 date: ""
 eleventyExcludeFromCollections: true
+permalink: /about/
 ---
 
 miriam, 28, currently living on ngunnawal and ngambri country.
